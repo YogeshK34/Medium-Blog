@@ -1,3 +1,5 @@
+
+
 import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { SignupInput } from "commonsyogeshmodule"
@@ -18,7 +20,9 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
                 postInputs) // Send postInputs directly
             // console.log(response)
-            const jwt = response.data;
+            const jwt = response.data.jwt;
+            console.log(response)
+            console.log(jwt)
             localStorage.setItem("token", jwt);
             navigate("/blogs");
         } catch (err) {
@@ -47,15 +51,12 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                 <div
 
                     className="pt-8">
-                    {type === "signup" ? <LabelledInput
-                        label="Name"
-                        placeholder="John Doe"
-                        onChange={(e) => {
-                            setPostInputs(({
-                                ...postInputs,
-                                name: e.target.value
-                            }))
-                        }} /> : null}
+                     {type === "signup" ? <LabelledInput label="Name" placeholder="Harkirat Singh..." onChange={(e) => {
+                        setPostInputs({
+                            ...postInputs,
+                            name: e.target.value
+                        })
+                    }} /> : null}
 
                     <LabelledInput
                         label="Email"

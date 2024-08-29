@@ -136,7 +136,6 @@ blogRouter.get('/bulk', async (c) => {
                         name: true
                     }
                 }
-
             }
         });
 

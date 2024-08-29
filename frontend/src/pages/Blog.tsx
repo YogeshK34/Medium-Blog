@@ -1,9 +1,9 @@
 import { Appbar } from "../components/Appbar"
 import { BlogCard } from "../components/BlogCard"
-import { useBlogs } from "../hooks"
+import { useBlogs } from "../hooks/index"
 
 export const Blogs = () => {
-    const [loading, blogs] = useBlogs();
+    const { loading, blogs } = useBlogs();
 
     if (loading) {
         return <div>
@@ -14,25 +14,15 @@ export const Blogs = () => {
     return <div>
         <Appbar />
         <div className="flex justify-center">
-            <div className="max-w-xl">
-                <BlogCard
-                    authorName={"Yogesh Khutwad"}
-                    title={"Embracing the Unpredictable: How to Find Joy in Life's Random Moments"}
-                    content={"Life is a series of unpredictable events, each with its own unique surprises...."}
-                    publishedDate={"26th March 2022"}
-                />
-                <BlogCard
-                    authorName={"Yogesh Khutwad"}
-                    title={"Embracing the Unpredictable: How to Find Joy in Life's Random Moments"}
-                    content={"Life is a series of unpredictable events, each with its own unique surprises...."}
-                    publishedDate={"26th March 2022"}
-                />
-                <BlogCard
-                    authorName={"Yogesh Khutwad"}
-                    title={"Embracing the Unpredictable: How to Find Joy in Life's Random Moments"}
-                    content={"Life is a series of unpredictable events, each with its own unique surprises...."}
-                    publishedDate={"26th March 2022"}
-                />
+            <div className="">
+                {
+                    blogs.map(blog => <BlogCard
+                        authorName={blog.author.name || "Anonymous  "}
+                        title={blog.title}
+                        content={blog.content}
+                        publishedDate={"26th March 2024"}
+                    />)
+                }
             </div>
         </div>
     </div>
